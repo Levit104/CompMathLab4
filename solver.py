@@ -30,6 +30,11 @@ def show_one(x, y, phi, name):
     plt.show()
 
 
+def linspace(a, b, n):
+    delta = (b - a) / (n - 1)
+    return [a + i * delta for i in range(n)]
+
+
 def print_show_results(points, points_number):
     x_values, y_values = get_xy(points)
 
@@ -55,7 +60,10 @@ def print_show_results(points, points_number):
             results.append((function.name, table1, table2))
 
             # show_one(x, y, phi, function.name)
-            plt.plot(x_values, phi, label=function.name)
+            # plt.plot(x_values, phi, label=function.name)
+            x_graph = linspace(min(x_values), max(x_values), 1000)
+            y_graph = [function(x) for x in x_graph]
+            plt.plot(x_graph, y_graph, label=function.name)
 
             if dev < best_value:
                 best_value = dev
